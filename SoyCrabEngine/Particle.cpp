@@ -145,3 +145,10 @@ void Particle::Integrate(real duration)
 	//Èû Ç×¸ñÀ» Áö¿î´Ù.
 	ClearAccumulator();
 }
+
+real Particle::CalculateKineticEnergy()
+{
+	//ï¿½îµ¿ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½  :  1/2 * m|v|^2
+	//m : ï¿½ï¿½ï¿½ï¿½ | |v| : ï¿½Óµï¿½
+	return (real)0.5 * GetMass() * (Velocity * Velocity);
+}
