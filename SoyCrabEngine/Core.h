@@ -7,6 +7,7 @@ public:
 	real X;
 	real Y;
 	real Z;
+
 private:
 	//4 Word(8Byte) 맞춤을 위해 덧붙임 
 	real pad = 0;
@@ -25,6 +26,12 @@ public:
 	void operator *= (const real Value) { X *= Value, Y *= Value, Z *= Value; }
 	//이 벡터와 주어진 벡터의 내적을 계산하여 반환한다. (ScalarProduct)
 	real operator*(const Vector3& V) const { return X * V.X + Y * V.Y + Z * V.Z; }
+
+	//모든 요소들을 0으로 초기화한다.
+	void Clear()
+	{
+		X = Y = Z = 0;
+	}
 
 	//부호 반전
 	void Invert()
