@@ -4,9 +4,6 @@
 
 class Particle
 {
-public:
-	Particle();
-	~Particle();
 
 protected:
 	
@@ -76,8 +73,11 @@ public:
 	//±×·¡¼­ ¶§·Î´Â ºÎÁ¤È®ÇÒ ¼ö ÀÖ´Ù.
 	void Integrate(real duration);
 
-	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 3.3 ï¿½ï¿½ï¿½ï¿½ ï¿½ß°ï¿½ï¿½ï¿½
-	//ï¿½îµ¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
+	//DampingÀ» ¼Óµµ¿¡ ±×³É °öÇØ¹ö¸®´Â ¹æ½Ä
+	void TEST_IntegrateNotFixed(real duration);
+
+	//¿¬½À¹®Á¦ 3.3 ¿¡¼­ Ãß°¡µÊ
+	//¿îµ¿¿¡³ÊÁö °è»ê
 	real CalculateKineticEnergy();
 };
 

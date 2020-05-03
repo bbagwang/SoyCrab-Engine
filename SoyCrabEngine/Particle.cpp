@@ -1,15 +1,6 @@
 #include "Particle.h"
 #include <assert.h>
-
-Particle::Particle()
-{
-
-}
-
-Particle::~Particle()
-{
-
-}
+#include <iostream>
 
 void Particle::SetMass(const real mass)
 {
@@ -135,12 +126,43 @@ void Particle::Integrate(real duration)
 	//힘으로부터 가속도를 계산한다.
 	//힘이 여러 종류가 있다면, 이 벡터에 가속도를 더해준다.
 	Vector3 resultingAcc = Acceleration;
-
+	resultingAcc.AddScaledVector(ForceAccum, InverseMass);
+	//AddForce(resultingAcc * GetMass());
 	//가속도로부터 속도를 업데이트한다.
 	Velocity.AddScaledVector(resultingAcc, duration);
 
 	//드래그를 적용한다.
 	Velocity *= real_pow(Damping, duration);
+
+	std::cout << "X : " << Velocity.X << " Y : " << Velocity.Y << " Z : " << Velocity.Z << std::endl;
+
+	//힘 항목을 지운다.
+	ClearAccumulator();
+}
+
+void Particle::TEST_IntegrateNotFixed(real duration)
+{
+	//무한대 질량인 입자는 적분하지 않는다.
+	if (InverseMass <= 0.f)
+		return;
+
+	assert(duration > 0.0f);
+
+	//위치를 업데이트한다.
+	Position.AddScaledVector(Velocity, duration);
+
+	//힘으로부터 가속도를 계산한다.
+	//힘이 여러 종류가 있다면, 이 벡터에 가속도를 더해준다.
+	Vector3 resultingAcc = Acceleration;
+	resultingAcc.AddScaledVector(ForceAccum, InverseMass);
+	//AddForce(resultingAcc * GetMass());
+	//가속도로부터 속도를 업데이트한다.
+	Velocity.AddScaledVector(resultingAcc, duration);
+
+	//드래그를 적용한다.
+	Velocity *= Damping;
+
+	std::cout << "X : " << Velocity.X << " Y : " << Velocity.Y << " Z : " << Velocity.Z << std::endl;
 
 	//힘 항목을 지운다.
 	ClearAccumulator();
@@ -148,7 +170,7 @@ void Particle::Integrate(real duration)
 
 real Particle::CalculateKineticEnergy()
 {
-	//占쏘동 占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙  :  1/2 * m|v|^2
-	//m : 占쏙옙占쏙옙 | |v| : 占쌈듸옙
+	//운동 에너지 공식  :  1/2 * m|v|^2
+	//m : 질량 | |v| : 속도
 	return (real)0.5 * GetMass() * (Velocity * Velocity);
 }
