@@ -101,4 +101,27 @@ public:
 		*this = VectorProduct(Vector);
 	}
 
+	//정규 직교 기저 구하기 (오른손 좌표계 기준)
+	//왼손 좌표계로 할려면 크로스 프로덕트를 계산할 때 순서 반대로 하면 된다.
+	void MakeOrthonormalBasis(Vector3* a, Vector3* b, Vector3* c)
+	{
+		//시작 벡터 a를 정규화한다.
+		a->Normalize();
+
+		//크로스 프로덕트를 계산하여 c를 찾는다. c = a X b
+		(*c) = (*a) % (*b);
+
+		//c의 길이가 0이면 실패: 즉, a와 b가 평행한 것이다.
+		if (c->SquareMagnitude() == 0.0) return;	//아니면 에러를 발생시킴
+
+		//c를 정규화 한다.
+		c->Normalize();
+
+		//a와 b가 서로 수직이 되도록 맞춰준다.
+		//방법은 a와 c의 크로스 프로덕트를 구해 b를 다시 계산하는 것이다.(b = c X a)
+		//곱하는 순서에 주의해야한다.
+		//벡터 a와 c가 길이가 1이고 서로 수직이므로 벡터 b의 길이는 1이다.
+		(*b) = (*c) % (*a);
+	}
+
 };
