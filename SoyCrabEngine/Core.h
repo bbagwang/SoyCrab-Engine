@@ -17,6 +17,9 @@ public:
 	Vector3() : X(0), Y(0), Z(0) {}
 	Vector3(const real X, const real Y, const real Z) :X(X), Y(Y), Z(Z) {}
 
+	//상수
+	const static Vector3 GRAVITY;
+
 	//연산자
 	Vector3 operator+(const Vector3& V) const { return Vector3(X + V.X, Y + V.Y, Z + V.Z); }
 	void operator+=(const Vector3& V) { X += V.X, Y += V.Y, Z += V.Z; }
