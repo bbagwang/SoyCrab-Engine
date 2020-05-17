@@ -33,6 +33,15 @@
     <ClCompile Include="Ballistic.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="Random.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Core.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Firework.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Core.h">
@@ -54,6 +63,12 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Ballistic.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Random.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Firework.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>

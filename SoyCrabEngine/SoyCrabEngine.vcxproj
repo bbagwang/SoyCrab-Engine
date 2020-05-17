@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -158,18 +158,27 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="app.cpp" />
-    <ClCompile Include="Ballistic.cpp" />
+    <ClCompile Include="Ballistic.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Core.cpp" />
+    <ClCompile Include="Firework.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Particle.cpp" />
+    <ClCompile Include="Random.cpp" />
     <ClCompile Include="SoyCrabEngine.cpp" />
     <ClCompile Include="timing.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="app.h" />
-    <ClInclude Include="Ballistic.h" />
+    <ClInclude Include="Ballistic.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="Core.h" />
+    <ClInclude Include="Firework.h" />
     <ClInclude Include="Particle.h" />
     <ClInclude Include="Precision.h" />
+    <ClInclude Include="Random.h" />
     <ClInclude Include="SoyCrabEngine.h" />
     <ClInclude Include="timing.h" />
   </ItemGroup>
