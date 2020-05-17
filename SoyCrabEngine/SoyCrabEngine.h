@@ -4,6 +4,8 @@
 #include "timing.h"
 #include "Precision.h"
 #include "Particle.h"
+#include "Random.h"
+#include "Firework.h"
 #include <GL/freeglut.h>
 #include <GL/freeglut_ext.h>
 #include <GL/freeglut_std.h>
