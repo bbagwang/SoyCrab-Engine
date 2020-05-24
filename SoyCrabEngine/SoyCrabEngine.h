@@ -6,6 +6,7 @@
 #include "Particle.h"
 #include "ParticleForceGenerator.h"
 #include "ParticleForceRegistry.h"
+#include "ParticleContact.h"
 #include "Random.h"
 #include "Firework.h"
 #include <GL/freeglut.h>
