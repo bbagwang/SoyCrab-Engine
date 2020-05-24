@@ -93,6 +93,28 @@ public:
 };
 #pragma endregion
 
+#pragma region ParticleFakeSpringGenerator
+//뻣뻣한 스프링 힘을 흉내 내는 힘 발생기로서, 한쪽 끝은 고정점에 연결되어 있다.
+class ParticleFakeSpringGenerator : public ParticleForceGenerator
+{
+private:
+	//스프링 고정단 위치
+	Vector3* Anchor;
+	//스프링 상수
+	real SpringConstant;
+	//스프링 진동의 댐핑
+	real Damping;
+public:
+	//주어진 인자를 바탕으로 새로운 스프링 인스턴스를 생성하는 생성자
+	ParticleFakeSpringGenerator(Vector3* Anchor, real SpringConstant, real Damping) :
+		Anchor(Anchor), SpringConstant(SpringConstant), Damping(Damping) {}
+	//주어진 입자에 스프링 힘을 적용한다.
+	virtual void UpdateForce(Particle* Particle, real Duration);
+	void SetAnchor(Vector3* NewAnchorPosition) { Anchor = NewAnchorPosition; }
+	Vector3 GetAnchor() const { return *Anchor; }
+};
+#pragma endregion
+
 #pragma region ParticleBungeeGenerator
 //잡아 늘였을 때에만 스프링 힘을 적용하는 힘 발생기
 class ParticleBungeeGenerator : public ParticleForceGenerator

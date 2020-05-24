@@ -69,6 +69,34 @@ void ParticleAnchoredSpringGenerator::UpdateForce(Particle* Particle, real Durat
 }
 #pragma endregion
 
+#pragma region ParticleFakeSpringGenerator
+void ParticleFakeSpringGenerator::UpdateForce(Particle* Particle, real Duration)
+{
+	//질량이 무한대인지 검사
+	if (!Particle->HasFiniteMass())
+		return;
+
+	//고정점을 기준으로 물체의 상대좌표 계산
+	Vector3 Position;
+	Particle->GetPosition(&Position);
+	Position -= *Anchor;
+
+	//상수 값을 계산하고 범위 내에 있는지를 검사
+	real Gamma = 0.5f * real_sqrt(4 * SpringConstant - real_pow(Damping, 2));
+	if (Gamma == 0.0f)
+		return;
+	Vector3 c = Position * (Damping / (2.0f * Gamma)) + Particle->GetVelocity() * (1.0f / Gamma);
+	
+	//옮겨가기 원하는 지점의 좌표 계산
+	Vector3 Target = Position * real_cos(Gamma * Duration) + c * real_sin(Gamma * Duration);
+	Target *= real_exp(-0.5f * Duration * Damping);
+
+	//필요한 가속도와 힘 계산
+	Vector3 Accel = (Target - Position) * (1.0f / real_pow(Duration, 2)) - Particle->GetVelocity() * Duration;
+	Particle->AddForce(Accel * Particle->GetMass());
+}
+#pragma endregion
+
 #pragma region ParticleBungeeGenerator
 void ParticleBungeeGenerator::UpdateForce(Particle* Particle, real Duration)
 {
@@ -131,6 +159,7 @@ void ParticleBuoyancyGenerator::UpdateForce(Particle* Particle, real Duration)
 	}
 
 	//아니라면, 부분적으로 잠긴 상태
+	//부력은 위로만 작용한다고 가정, 후크의 법칙(Hook's Law)에서 길이에 해당하는 값 계산.
 	Force.Y = LiquidDensity * Volume * (Depth - MaxDepth - WaterHeight) / 2 * MaxDepth;
 	Particle->AddForce(Force);
 }
