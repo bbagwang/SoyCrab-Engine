@@ -70,4 +70,25 @@ public:
 	virtual void UpdateForce(Particle* Particle, real Duration);
 };
 #pragma endregion
+
+#pragma region ParticleAnchoredSpringGenerator
+class ParticleAnchoredSpringGenerator : public ParticleForceGenerator
+{
+private:
+	//������ ������ ��ġ
+	Vector3* Anchor;
+	//������ ���
+	real SpringConstant;
+	//������ ���� ����
+	real RestLength;
+public:
+	//�־��� ���ڸ� �������� ���ο� ������ �ν��Ͻ��� �����ϴ� ������
+	ParticleAnchoredSpringGenerator(Vector3* Anchor, real SpringConstant, real RestLength) :
+		Anchor(Anchor), SpringConstant(SpringConstant), RestLength(RestLength) {}
+	//�־��� ���ڿ� ������ ���� �����Ѵ�.
+	virtual void UpdateForce(Particle* Particle, real Duration);
+	void SetAnchor(Vector3* NewAnchorPosition) { Anchor = NewAnchorPosition; }
+	Vector3 GetAnchor() const { return *Anchor; }
+};
+#pragma endregion
 #pragma endregion
