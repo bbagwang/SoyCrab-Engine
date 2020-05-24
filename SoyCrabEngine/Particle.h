@@ -73,9 +73,6 @@ public:
 	//그래서 때로는 부정확할 수 있다.
 	void Integrate(real duration);
 
-	//Damping을 속도에 그냥 곱해버리는 방식
-	void TEST_IntegrateNotFixed(real duration);
-
 	//연습문제 3.3 에서 추가됨
 	//운동에너지 계산
 	real CalculateKineticEnergy();
