@@ -12,12 +12,18 @@ void ParticleForceRegistry::Add(Particle* particle, ParticleForceGenerator* fg)
 
 void ParticleForceRegistry::Remove(Particle* particle, ParticleForceGenerator* fg)
 {
-
+	Registry::iterator Iter = registrations.begin();
+	for (;Iter!=registrations.end();Iter++)
+	{
+		if (Iter->particle == particle && Iter->fg == fg)
+			return;
+	}
+	registrations.erase(Iter);
 }
 
 void ParticleForceRegistry::Clear()
 {
-
+	registrations.clear();
 }
 
 void ParticleForceRegistry::UpdateForces(real duration)
