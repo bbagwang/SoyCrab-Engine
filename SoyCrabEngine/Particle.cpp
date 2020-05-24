@@ -26,6 +26,11 @@ real Particle::GetInverseMass() const
 	return InverseMass;
 }
 
+bool Particle::HasFiniteMass() const
+{
+	return InverseMass >= 0.0f;
+}
+
 void Particle::SetDamping(const real damping)
 {
 	Damping = damping;

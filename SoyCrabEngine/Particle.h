@@ -26,7 +26,7 @@ protected:
 	//(수치 시뮬레이션에서 완전히 불안정함)
 	real InverseMass;
 
-	//다음 시뮬레이션에 사용될 힘을 저장.
+	//다음 시뮬레이션에 사용될 합력을 저장.
 	//매 이터레이션마다 0으로 초기화 된다.
 	Vector3 ForceAccum;
 
@@ -39,6 +39,8 @@ public:
 	void SetInverseMass(const real inverseMass);
 	//역질량 가저오기
 	real GetInverseMass() const;
+	//유한의 질량(양수)을 갖고 있는지
+	bool HasFiniteMass() const;
 
 	//뎀핑(감쇄) 설정
 	void SetDamping(const real damping);
@@ -65,7 +67,11 @@ public:
 	Vector3 GetAcceleration() const;
 	void GetAcceleration(Vector3* acceleration) const;
 
+	//합력을 0으로 초기화함.
 	void ClearAccumulator();
+	//달랑베르의 원리에 따라 합력을 더하기 위해
+	//힘을 추가하는 인터페이스 함수라고 보면 된다.
+	//힘을 더하는 과정은 Integrate(적분) 하기 전에 모두 수행되어야 한다.
 	void AddForce(const Vector3& force);
 	//입자에 대하여, 주어진 시간 간격만큼 적분을 수행한다.
 	//이 함수는 뉴턴-오일러 적분법을 사용하는데,
