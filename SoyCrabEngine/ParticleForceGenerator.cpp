@@ -67,4 +67,24 @@ void ParticleAnchoredSpringGenerator::UpdateForce(Particle* Particle, real Durat
 	Particle->AddForce(Force);
 }
 #pragma endregion
+
+#pragma region ParticleBungeeGenerator
+void ParticleBungeeGenerator::UpdateForce(Particle* Particle, real Duration)
+{
+	Vector3 Force;
+	Particle->GetPosition(&Force);
+	Force -= Other->GetPosition();
+	//������� ����Ǿ����� �˻�
+	real Magnitude = Force.Magnitude();
+	if (Magnitude <= RestLength)
+		return;
+	
+	//���� ũ�� ���
+	Magnitude = SpringConstant * (RestLength - Magnitude);
+
+	//���� ���� ����ϰ� ����
+	Force.Normalize();
+	Force *= -Magnitude;
+	Particle->AddForce(Force);
+}
 #pragma endregion

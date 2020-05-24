@@ -91,4 +91,22 @@ public:
 	Vector3 GetAnchor() const { return *Anchor; }
 };
 #pragma endregion
+
+#pragma region ParticleBungeeGenerator
+class ParticleBungeeGenerator : public ParticleForceGenerator
+{
+private:
+	//������ �ݴ��� ���� �ִ� ����
+	Particle* Other;
+	//������ ���
+	real SpringConstant;
+	//���� �߻���Ű�� �����ϴ� �������� ������� ����
+	real RestLength;
+public:
+	//�־��� ���ڸ� �������� ���ο� ������� �����ϴ� ������
+	ParticleBungeeGenerator(Particle* Other, real SpringConstant, real RestLength) :
+		Other(Other), SpringConstant(SpringConstant), RestLength(RestLength) {}
+	//�־��� ���ڿ� ������ ���� �����Ѵ�.
+	virtual void UpdateForce(Particle* Particle, real Duration);
+};
 #pragma endregion
