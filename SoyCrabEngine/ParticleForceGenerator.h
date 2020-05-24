@@ -72,6 +72,7 @@ public:
 #pragma endregion
 
 #pragma region ParticleAnchoredSpringGenerator
+//한쪽 끝이 고정점에 연결된 스프링의 힘을 적용하는 힘 발생기
 class ParticleAnchoredSpringGenerator : public ParticleForceGenerator
 {
 private:
@@ -93,6 +94,7 @@ public:
 #pragma endregion
 
 #pragma region ParticleBungeeGenerator
+//잡아 늘였을 때에만 스프링 힘을 적용하는 힘 발생기
 class ParticleBungeeGenerator : public ParticleForceGenerator
 {
 private:
@@ -108,5 +110,27 @@ public:
 		Other(Other), SpringConstant(SpringConstant), RestLength(RestLength) {}
 	//주어진 입자에 스프링 힘을 적용한다.
 	virtual void UpdateForce(Particle* Particle, real Duration);
+};
+#pragma endregion
+
+#pragma region ParticleAnchoredBungeeGenerator
+//한쪽 끝이 고정점에 연결된 잡아 늘였을 때에만 스프링의 힘을 적용하는 힘 발생기
+class ParticleAnchoredBungeeGenerator : public ParticleForceGenerator
+{
+private:
+	//스프링 고정단 위치
+	Vector3* Anchor;
+	//스프링 상수
+	real SpringConstant;
+	//힘을 발생시키기 시작하는 시점에서 고무줄의 길이
+	real RestLength;
+public:
+	//주어진 인자를 바탕으로 새로운 고무줄을 생성하는 생성자
+	ParticleAnchoredBungeeGenerator(Vector3* Anchor, real SpringConstant, real RestLength) :
+		Anchor(Anchor), SpringConstant(SpringConstant), RestLength(RestLength) {}
+	//주어진 입자에 스프링 힘을 적용한다.
+	virtual void UpdateForce(Particle* Particle, real Duration);
+	void SetAnchor(Vector3* NewAnchorPosition) { Anchor = NewAnchorPosition; }
+	Vector3 GetAnchor() const { return *Anchor; }
 };
 #pragma endregion

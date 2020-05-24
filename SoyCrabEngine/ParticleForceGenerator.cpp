@@ -79,6 +79,27 @@ void ParticleBungeeGenerator::UpdateForce(Particle* Particle, real Duration)
 	real Magnitude = Force.Magnitude();
 	if (Magnitude <= RestLength)
 		return;
+
+	//힘의 크기 계산
+	Magnitude = SpringConstant * (RestLength - Magnitude);
+
+	//최종 힘을 계산하고 적용
+	Force.Normalize();
+	Force *= -Magnitude;
+	Particle->AddForce(Force);
+}
+#pragma endregion
+
+#pragma region ParticleAnchoredBungeeGenerator
+void ParticleAnchoredBungeeGenerator::UpdateForce(Particle* Particle, real Duration)
+{
+	Vector3 Force;
+	Particle->GetPosition(&Force);
+	Force -= *Anchor;
+	//고무줄이 압축되었는지 검사
+	real Magnitude = Force.Magnitude();
+	if (Magnitude <= RestLength)
+		return;
 	
 	//힘의 크기 계산
 	Magnitude = SpringConstant * (RestLength - Magnitude);
