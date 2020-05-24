@@ -50,3 +50,24 @@ public:
 	virtual void UpdateForce(Particle* Particle, real Duration);
 };
 #pragma endregion
+
+#pragma region SpringGenerator
+//������ ���� �����ϴ� �� �߻���
+class ParticleSpringGenerator : public ParticleForceGenerator
+{
+private:
+	//�������� �ݴ��� ���� ����
+	Particle* Other;
+	//������ ���
+	real SpringConstant;
+	//������ ���� ����
+	real RestLength;
+public:
+	//�־��� ���ڵ��� ���� ���ο� ������ ��ü�� �����ϴ� ������
+	ParticleSpringGenerator(Particle* Other, real SpringConstant, real RestLength)
+		:Other(Other), SpringConstant(SpringConstant), RestLength(RestLength) {}
+	//�־��� ���ڿ� ������ ���� �����Ѵ�.
+	virtual void UpdateForce(Particle* Particle, real Duration);
+};
+#pragma endregion
+#pragma endregion

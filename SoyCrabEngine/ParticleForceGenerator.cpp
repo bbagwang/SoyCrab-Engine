@@ -25,3 +25,28 @@ void ParticleDragGenerator::UpdateForce(Particle* Particle, real Duration)
 	Particle->AddForce(Force);
 }
 #pragma endregion
+
+#pragma region SpringGenerator
+void ParticleSpringGenerator::UpdateForce(Particle* Particle, real Duration)
+{
+	if (!Particle)
+		return;
+	
+	//������ ���� ���
+	Vector3 Force;
+	Particle->GetPosition(&Force);
+	Force -= Other->GetPosition();
+	
+	//��ũ�� ��Ģ(Hook's Law)�� �ǰ��� ������ ���� ����
+	//���� ũ�� ���
+	real Magnitude = Force.Magnitude();
+	Magnitude = real_abs(Magnitude - RestLength);
+	Magnitude *= SpringConstant;
+	
+	//���� ���� ����Ͽ� ���ڿ� �����Ѵ�.
+	Force.Normalize();
+	Force *= -Magnitude;
+	Particle->AddForce(Force);
+}
+#pragma endregion
+#pragma endregion
