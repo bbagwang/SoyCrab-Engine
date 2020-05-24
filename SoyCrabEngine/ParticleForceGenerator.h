@@ -52,21 +52,21 @@ public:
 #pragma endregion
 
 #pragma region SpringGenerator
-//О©╫О©╫О©╫О©╫О©╫О©╫ О©╫О©╫О©╫О©╫ О©╫О©╫О©╫О©╫О©╫о╢О©╫ О©╫О©╫ О©╫ъ╩О©╫О©╫О©╫
+//╫╨га╦╣ хШю╩ юШ©Кго╢б хШ ╧ъ╩Щ╠Б
 class ParticleSpringGenerator : public ParticleForceGenerator
 {
 private:
-	//О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫ О©╫щ╢О©╫О©╫О©╫ О©╫О©╫О©╫О©╫ О©╫О©╫О©╫О©╫
+	//╫╨га╦╣юг ╧щ╢Кбй Ё║юг ютюз
 	Particle* Other;
-	//О©╫О©╫О©╫О©╫О©╫О©╫ О©╫О©╫О©╫
+	//╫╨га╦╣ ╩С╪Ж
 	real SpringConstant;
-	//О©╫О©╫О©╫О©╫О©╫О©╫ О©╫О©╫О©╫О©╫ О©╫О©╫О©╫О©╫
+	//╫╨га╦╣ хчаЖ ╠Фюл
 	real RestLength;
 public:
-	//О©╫ж╬О©╫О©╫О©╫ О©╫О©╫О©╫з╣О©╫О©╫О©╫ О©╫О©╫О©╫О©╫ О©╫О©╫О©╫н©О©╫ О©╫О©╫О©╫О©╫О©╫О©╫ О©╫О©╫ц╪О©╫О©╫ О©╫О©╫О©╫О©╫О©╫о╢О©╫ О©╫О©╫О©╫О©╫О©╫О©╫
+	//аж╬НаЬ юнюз╣Ию╩ еД╢К╥н ╩У╥н©Н ╫╨га╦╣ ╟Ёц╪╦╕ ╩Щ╪╨го╢б ╩Щ╪╨юз
 	ParticleSpringGenerator(Particle* Other, real SpringConstant, real RestLength)
 		:Other(Other), SpringConstant(SpringConstant), RestLength(RestLength) {}
-	//О©╫ж╬О©╫О©╫О©╫ О©╫О©╫О©╫з©О©╫ О©╫О©╫О©╫О©╫О©╫О©╫ О©╫О©╫О©╫О©╫ О©╫О©╫О©╫О©╫О©╫я╢О©╫.
+	//аж╬НаЬ ютюз©║ ╫╨га╦╣ хШю╩ юШ©Кгя╢ы.
 	virtual void UpdateForce(Particle* Particle, real Duration);
 };
 #pragma endregion
@@ -75,17 +75,17 @@ public:
 class ParticleAnchoredSpringGenerator : public ParticleForceGenerator
 {
 private:
-	//О©╫О©╫О©╫О©╫О©╫О©╫ О©╫О©╫О©╫О©╫О©╫О©╫ О©╫О©╫д║
+	//╫╨га╦╣ ╟Ма╓╢э ю╖д║
 	Vector3* Anchor;
-	//О©╫О©╫О©╫О©╫О©╫О©╫ О©╫О©╫О©╫
+	//╫╨га╦╣ ╩С╪Ж
 	real SpringConstant;
-	//О©╫О©╫О©╫О©╫О©╫О©╫ О©╫О©╫О©╫О©╫ О©╫О©╫О©╫О©╫
+	//╫╨га╦╣ хчаЖ ╠Фюл
 	real RestLength;
 public:
-	//О©╫ж╬О©╫О©╫О©╫ О©╫О©╫О©╫з╦О©╫ О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫ О©╫О©╫О©╫н©О©╫ О©╫О©╫О©╫О©╫О©╫О©╫ О©╫н╫О©╫О©╫о╫О©╫О©╫О©╫ О©╫О©╫О©╫О©╫О©╫о╢О©╫ О©╫О©╫О©╫О©╫О©╫О©╫
+	//аж╬НаЬ юнюз╦╕ ╧ыеаю╦╥н ╩У╥н©Н ╫╨га╦╣ юн╫╨ео╫╨╦╕ ╩Щ╪╨го╢б ╩Щ╪╨юз
 	ParticleAnchoredSpringGenerator(Vector3* Anchor, real SpringConstant, real RestLength) :
 		Anchor(Anchor), SpringConstant(SpringConstant), RestLength(RestLength) {}
-	//О©╫ж╬О©╫О©╫О©╫ О©╫О©╫О©╫з©О©╫ О©╫О©╫О©╫О©╫О©╫О©╫ О©╫О©╫О©╫О©╫ О©╫О©╫О©╫О©╫О©╫я╢О©╫.
+	//аж╬НаЬ ютюз©║ ╫╨га╦╣ хШю╩ юШ©Кгя╢ы.
 	virtual void UpdateForce(Particle* Particle, real Duration);
 	void SetAnchor(Vector3* NewAnchorPosition) { Anchor = NewAnchorPosition; }
 	Vector3 GetAnchor() const { return *Anchor; }
@@ -96,17 +96,17 @@ public:
 class ParticleBungeeGenerator : public ParticleForceGenerator
 {
 private:
-	//О©╫О©╫О©╫О©╫О©╫О©╫ О©╫щ╢О©╫О©╫О©╫ О©╫О©╫О©╫О©╫ О©╫ж╢О©╫ О©╫О©╫О©╫О©╫
+	//╫╨га╦╣ ╧щ╢КфМ Ё║©║ юж╢б ютюз
 	Particle* Other;
-	//О©╫О©╫О©╫О©╫О©╫О©╫ О©╫О©╫О©╫
+	//╫╨га╦╣ ╩С╪Ж
 	real SpringConstant;
-	//О©╫О©╫О©╫О©╫ О©╫ъ╩О©╫О©╫О©╫е╟О©╫О©╫ О©╫О©╫О©╫О©╫О©╫о╢О©╫ О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫ О©╫О©╫О©╫О©╫О©╫О©╫О©╫ О©╫О©╫О©╫О©╫
+	//хШю╩ ╧ъ╩Щ╫це╟╠Б ╫цюшго╢б ╫ца║©║╪╜ ╟М╧╚аыюг ╠Фюл
 	real RestLength;
 public:
-	//О©╫ж╬О©╫О©╫О©╫ О©╫О©╫О©╫з╦О©╫ О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫ О©╫О©╫О©╫н©О©╫ О©╫О©╫О©╫О©╫О©╫О©╫О©╫ О©╫О©╫О©╫О©╫О©╫о╢О©╫ О©╫О©╫О©╫О©╫О©╫О©╫
+	//аж╬НаЬ юнюз╦╕ ╧ыеаю╦╥н ╩У╥н©Н ╟М╧╚аыю╩ ╩Щ╪╨го╢б ╩Щ╪╨юз
 	ParticleBungeeGenerator(Particle* Other, real SpringConstant, real RestLength) :
 		Other(Other), SpringConstant(SpringConstant), RestLength(RestLength) {}
-	//О©╫ж╬О©╫О©╫О©╫ О©╫О©╫О©╫з©О©╫ О©╫О©╫О©╫О©╫О©╫О©╫ О©╫О©╫О©╫О©╫ О©╫О©╫О©╫О©╫О©╫я╢О©╫.
+	//аж╬НаЬ ютюз©║ ╫╨га╦╣ хШю╩ юШ©Кгя╢ы.
 	virtual void UpdateForce(Particle* Particle, real Duration);
 };
 #pragma endregion

@@ -32,23 +32,24 @@ void ParticleSpringGenerator::UpdateForce(Particle* Particle, real Duration)
 	if (!Particle)
 		return;
 	
-	//О©╫О©╫О©╫О©╫О©╫О©╫ О©╫О©╫О©╫О©╫ О©╫О©╫О©╫
+	//╫╨га╦╣ ╨╓ем ╟Х╩Й
 	Vector3 Force;
 	Particle->GetPosition(&Force);
 	Force -= Other->GetPosition();
 	
-	//О©╫О©╫е╘О©╫О©╫ О©╫О©╫д╒(Hook's Law)О©╫О©╫ О©╫г╟О©╫О©╫О©╫ О©╫О©╫О©╫О©╫О©╫О©╫ О©╫О©╫О©╫О©╫ О©╫О©╫О©╫О©╫
-	//О©╫О©╫О©╫О©╫ е╘О©╫О©╫ О©╫О©╫О©╫
+	//хде╘юг ╧Щд╒(Hook's Law)©║ юг╟егя ╫╨га╦╣ ╪Ж╫д юШ©К
+	//хШюг е╘╠Б ╟Х╩Й
 	real Magnitude = Force.Magnitude();
 	Magnitude = real_abs(Magnitude - RestLength);
 	Magnitude *= SpringConstant;
 	
-	//О©╫О©╫О©╫О©╫ О©╫О©╫О©╫О©╫ О©╫О©╫О©╫О©╫о©О©╫ О©╫О©╫О©╫з©О©╫ О©╫О©╫О©╫О©╫О©╫я╢О©╫.
+	//цжа╬ хШю╩ ╟Х╩Йго©╘ ютюз©║ юШ©Кгя╢ы.
 	Force.Normalize();
 	Force *= -Magnitude;
 	Particle->AddForce(Force);
 }
 #pragma endregion
+
 #pragma region AnchoredSpringGenerator
 void ParticleAnchoredSpringGenerator::UpdateForce(Particle* Particle, real Duration)
 {
@@ -56,12 +57,12 @@ void ParticleAnchoredSpringGenerator::UpdateForce(Particle* Particle, real Durat
 	Particle->GetPosition(&Force);
 	Force -= *Anchor;
 
-	//О©╫О©╫е╘О©╫О©╫ О©╫О©╫д╒(Hook's Law)О©╫О©╫ О©╫г╟О©╫О©╫О©╫ О©╫О©╫О©╫О©╫О©╫О©╫ О©╫О©╫О©╫О©╫ О©╫О©╫О©╫О©╫
-	//О©╫О©╫О©╫О©╫ е╘О©╫О©╫ О©╫О©╫О©╫
+	//хде╘юг ╧Щд╒(Hook's Law)©║ юг╟егя ╫╨га╦╣ ╪Ж╫д юШ©К
+	//хШюг е╘╠Б ╟Х╩Й
 	real Magnitude = Force.Magnitude();
 	Magnitude = (RestLength - Magnitude) * SpringConstant;
 
-	//О©╫О©╫О©╫О©╫ О©╫О©╫О©╫О©╫ О©╫О©╫О©╫О©╫о©О©╫ О©╫О©╫О©╫О©╫
+	//цжа╬ хШю╩ ╟Х╩Йго©╘ юШ©К
 	Force.Normalize();
 	Force *= Magnitude;
 	Particle->AddForce(Force);
@@ -74,15 +75,15 @@ void ParticleBungeeGenerator::UpdateForce(Particle* Particle, real Duration)
 	Vector3 Force;
 	Particle->GetPosition(&Force);
 	Force -= Other->GetPosition();
-	//О©╫О©╫О©╫О©╫О©╫О©╫О©╫ О©╫О©╫О©╫О©╫г╬О©╫О©╫О©╫О©╫О©╫ О©╫к╩О©╫
+	//╟М╧╚аыюл ╬пцЮ╣г╬З╢баЖ ╟к╩Г
 	real Magnitude = Force.Magnitude();
 	if (Magnitude <= RestLength)
 		return;
 	
-	//О©╫О©╫О©╫О©╫ е╘О©╫О©╫ О©╫О©╫О©╫
+	//хШюг е╘╠Б ╟Х╩Й
 	Magnitude = SpringConstant * (RestLength - Magnitude);
 
-	//О©╫О©╫О©╫О©╫ О©╫О©╫О©╫О©╫ О©╫О©╫О©╫О©╫о╟О©╫ О©╫О©╫О©╫О©╫
+	//цжа╬ хШю╩ ╟Х╩Йго╟М юШ©К
 	Force.Normalize();
 	Force *= -Magnitude;
 	Particle->AddForce(Force);
