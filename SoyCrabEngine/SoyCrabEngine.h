@@ -14,6 +14,3 @@
 #include <GL/glut.h>
 #include <cstring>
 #include <cstdio>
-#include <vector>
-
-#define FORCEINLINE inline

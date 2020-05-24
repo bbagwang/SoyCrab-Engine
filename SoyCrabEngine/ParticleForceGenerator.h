@@ -11,6 +11,10 @@ public:
 #pragma region GravityGenerator
 //중력을 적용하는 힘 발생기
 //인스턴스 하나로 여러 개의 입자에 사용 가능.
+
+//간단하다는 장점이 있지만, 댐핑과 중력 가속도는 기존 코드 사용.
+//이유는 매 프레임마다 이걸 일일히 계산해야할 필요가 없기 때문.
+//이미 답을 알고있는 계산을 하는 것과 다름이 없다.
 class ParticleGravityGenerator : public ParticleForceGenerator
 {
 private:
