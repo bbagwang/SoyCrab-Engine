@@ -110,3 +110,28 @@ void ParticleAnchoredBungeeGenerator::UpdateForce(Particle* Particle, real Durat
 	Particle->AddForce(Force);
 }
 #pragma endregion
+
+#pragma region ParticleBuoyancyGenerator
+void ParticleBuoyancyGenerator::UpdateForce(Particle* Particle, real Duration)
+{
+	//물속에 잠긴 깊이를 계산한다.
+	real Depth = Particle->GetPosition().Y;
+	//물속인지 밖인지 검사한다.
+	if (Depth >= WaterHeight + MaxDepth)
+		return;
+
+	Vector3 Force;
+	
+	//최대 깊이인지 확인 (완전 잠긴 상태)
+	if (Depth <= WaterHeight - MaxDepth)
+	{
+		Force.Y = LiquidDensity * Volume;
+		Particle->AddForce(Force);
+		return;
+	}
+
+	//아니라면, 부분적으로 잠긴 상태
+	Force.Y = LiquidDensity * Volume * (Depth - MaxDepth - WaterHeight) / 2 * MaxDepth;
+	Particle->AddForce(Force);
+}
+#pragma endregion

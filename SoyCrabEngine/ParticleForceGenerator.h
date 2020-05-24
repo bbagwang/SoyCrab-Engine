@@ -134,3 +134,27 @@ public:
 	Vector3 GetAnchor() const { return *Anchor; }
 };
 #pragma endregion
+
+#pragma region ParticleBuoyancyGenerator
+//XZ 평면에 평행한 수면에 대해 부력을 적용하는 힘 발생기
+class ParticleBuoyancyGenerator : public ParticleForceGenerator
+{
+private:
+	//최대 부력을 발생시키기 전 개체의 최대 침수 깊이
+	real MaxDepth;
+	//물체의 부피
+	real Volume;
+	//수면이 y = 0 인 평면으로부터 이동한 높이
+	//수면은 XZ 평면에 평행한 것으로 가정.
+	real WaterHeight;
+	//액체의 밀도
+	//순수한 물의 밀도는 1000 kg/m^(-3)
+	real LiquidDensity = 1000.f;
+public:
+	//주어진 인자를 바탕으로 새로운 부력 개체 생성.
+	ParticleBuoyancyGenerator(real MaxDepth, real Volume, real WaterHeight, real LiquidDensity = 1000.f)
+		:MaxDepth(MaxDepth), Volume(Volume), WaterHeight(WaterHeight), LiquidDensity(LiquidDensity) {}
+	//주어진 입자에 부력 적용
+	virtual void UpdateForce(Particle* Particle, real Duration);
+};
+#pragma endregion
