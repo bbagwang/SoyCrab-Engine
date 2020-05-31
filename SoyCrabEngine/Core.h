@@ -19,6 +19,11 @@ public:
 
 	//상수
 	const static Vector3 GRAVITY;
+	const static Vector3 UP;
+	const static Vector3 RIGHT;
+	const static Vector3 X_AXIS;
+	const static Vector3 Y_AXIS;
+	const static Vector3 Z_AXIS;
 
 	//연산자
 	Vector3 operator+(const Vector3& V) const { return Vector3(X + V.X, Y + V.Y, Z + V.Z); }
