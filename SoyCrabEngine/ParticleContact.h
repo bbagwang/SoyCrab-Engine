@@ -63,8 +63,16 @@ public:
 	ParticleContactResolver(unsigned Iterations) : Iterations(Iterations) {}
 
 	//최대 반복 횟수를 지정한다.
-	FORCEINLINE void SetIterations(unsigned Iterations) { ParticleContactResolver::Iterations = Iterations; }
+	void SetIterations(unsigned Iterations) { ParticleContactResolver::Iterations = Iterations; }
 
 	//겹쳐진 부분과 속도에 대해 입자들의 접촉을 처리한다.
 	void ResolveContacts(ParticleContact* ContactArray, unsigned NumContacts, real Duration);
+};
+
+//입자 접촉 처리를 위한 기본 인터페이스 클레스
+class ParticleContactGenerator
+{
+public:
+	//충돌 등록 인터페이스
+	virtual unsigned addContact(ParticleContact* contact, unsigned limit) const = 0;
 };
