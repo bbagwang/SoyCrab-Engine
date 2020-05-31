@@ -46,3 +46,25 @@ private:
 	void ResolveInterpenetration(real duration);
 };
 
+//입자 접촉에 대한 접촉 처리기.
+//인스턴스는 하나만 만들어서 돌려쓰면 된다.
+class ParticleContactResolver
+{
+protected:
+	//반복 횟수.
+	unsigned Iterations;
+
+	//실제 동작한 반복 횟수를 기록한다.
+	//성능 측정이 목적이다.
+	unsigned IterationsUsed;
+
+public:
+	//새로운 접촉 처리기 개체를 생성한다.
+	ParticleContactResolver(unsigned Iterations) : Iterations(Iterations) {}
+
+	//최대 반복 횟수를 지정한다.
+	FORCEINLINE void SetIterations(unsigned Iterations) { ParticleContactResolver::Iterations = Iterations; }
+
+	//겹쳐진 부분과 속도에 대해 입자들의 접촉을 처리한다.
+	void ResolveContacts(ParticleContact* ContactArray, unsigned NumContacts, real Duration);
+};

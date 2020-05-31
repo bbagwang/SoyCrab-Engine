@@ -27,6 +27,22 @@ void ParticleContact::ResolveVelocity(real duration)
 	}
 	//새롭게 계산된 분리 속도.
 	real NewSepVelocity = -SeparatingVelocity * Restitution;
+
+	//속도가 가속도만에 의한 것인지를 검사한다.
+	Vector3 AccCausedVelocity = Particles[0]->GetAcceleration();
+	if (Particles[1])
+		AccCausedVelocity -= Particles[1]->GetAcceleration();
+	real AccCausedSepVelocity = AccCausedVelocity * ContactNormal * duration;
+
+	//가속도에 의해 접근 속도가 생겼으면, 이를 새로운 분리 속도에서 제거한다.
+	if (AccCausedSepVelocity < 0)
+	{
+		NewSepVelocity += Restitution * AccCausedSepVelocity;
+		//실제 필요한 것 보다 더 많이 빼내지는 않았는지 확인한다.
+		if (NewSepVelocity < 0)
+			NewSepVelocity = 0;
+	}
+	
 	real DeltaVelocity = NewSepVelocity - SeparatingVelocity;
 
 	//각각의 물체에 대하여 질량에 반비례하여 속도를 변경한다.
@@ -35,13 +51,13 @@ void ParticleContact::ResolveVelocity(real duration)
 	if (Particles[1])
 		TotalInverseMass += Particles[1]->GetInverseMass();
 
-	//모든 물체의 질량이 무한대이면 충격량(Impulse)의 효과가 없다.
+	//모든 물체의 질량이 무한대이면 충격량(Impulse)의 계산 효과가 의미가 없다.
 	if (TotalInverseMass <= 0)
 		return;
 
 	//적용할 충격량을 계산한다.
 	real Impulse = DeltaVelocity / TotalInverseMass;
-	//반비례하는 질량 단위(Unit)당 충격량을 계산한다.
+	//접촉 법선 방향의 충격량을 계산한다.
 	Vector3 ImpulsePerIMass = ContactNormal * Impulse;
 
 	//충격량을 적용한다. 충격량은 접촉 방향으로,
@@ -88,5 +104,33 @@ void ParticleContact::ResolveInterpenetration(real duration)
 	if (Particles[1])
 	{
 		Particles[1]->SetPosition(Particles[1]->GetPosition() + ParticleMovement[1]);
+	}
+}
+
+void ParticleContactResolver::ResolveContacts(ParticleContact* ContactArray, unsigned NumContacts, real Duration)
+{
+	unsigned i;
+	IterationsUsed = 0;
+	while (IterationsUsed < Iterations)
+	{
+		//접근 속도가 가장 큰 접촉을 찾는다.
+		real Max = REAL_MAX;
+		unsigned MaxIndex = NumContacts;
+		for (i = 0; i < NumContacts; i++)
+		{
+			real SepVel = ContactArray[i].CalculateSeparatingVelocity();
+			if (SepVel < Max && (SepVel < 0 || ContactArray[i].Penetration>0))
+			{
+				Max = SepVel;
+				MaxIndex = i;
+			}
+		}
+		//오류 체크
+		if(MaxIndex == NumContacts)
+			break;
+
+		//이 접촉을 처리한다.
+		ContactArray[MaxIndex].Resolve(Duration);
+		IterationsUsed++;
 	}
 }
