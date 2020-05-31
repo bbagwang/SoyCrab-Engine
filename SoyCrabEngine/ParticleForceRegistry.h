@@ -1,6 +1,6 @@
 #pragma once
 #include "SoyCrabEngine.h"
-#include <vector>
+
 class ParticleForceGenerator;
 
 class ParticleForceRegistry
