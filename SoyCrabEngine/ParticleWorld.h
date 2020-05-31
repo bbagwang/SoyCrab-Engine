@@ -56,6 +56,16 @@ public:
 
 	//등록된 힘 발생기 배열을 리턴한다.
 	ParticleForceRegistry& GetForceRegistry() { return Registry; }
+};
 
-	
+//입자 포인터 STL 벡터를 가져다가 지면 충돌을 발생시키는 충돌 발생기
+class GroundContacts : public ParticleContactGenerator
+{
+	std::vector<Particle*>* Particles;
+
+public:
+	//초기화
+	void Init(std::vector<Particle*>* Particles);
+	//충돌 등록
+	virtual unsigned AddContact(ParticleContact* Contact, unsigned Limit) const;
 };

@@ -1,13 +1,14 @@
-#include "ParticleWorld.h"
+#include "SoyCrabEngine.h"
 
-ParticleWorld::ParticleWorld(unsigned MaxContacts, unsigned Iterations /*= 0*/)
+ParticleWorld::ParticleWorld(unsigned MaxContacts, unsigned Iterations /*= 0*/) :Resolver(Iterations), MaxContacts(MaxContacts)
 {
-
+	Contacts = new ParticleContact[MaxContacts];
+	CalculateIterations = (Iterations == 0);
 }
 
 ParticleWorld::~ParticleWorld()
 {
-
+	delete[] Contacts;
 }
 
 unsigned ParticleWorld::GenerateContacts()
@@ -64,4 +65,35 @@ void ParticleWorld::StartFrame()
 	{
 		Iter->ClearAccumulator();
 	}
+}
+
+void GroundContacts::Init(std::vector<Particle*>* Particles)
+{
+	GroundContacts::Particles = Particles;
+}
+
+unsigned GroundContacts::AddContact(ParticleContact* Contact, unsigned Limit) const
+{
+	unsigned Count = 0;
+
+	for (auto* Iter : *Particles)
+	{
+		real Y = Iter->GetPosition().Y;
+		
+		if (Y < 0.0f)
+		{
+			//바닥충돌 관련 변수 설정.
+			Contact->ContactNormal = Vector3::UP;
+			Contact->Particles[0] = Iter;
+			Contact->Particles[1] = nullptr;
+			Contact->Penetration = -Y;
+			Contact->Restitution = 0.2f;
+			Contact++;
+			Count++;
+		}
+
+		if (Count >= Limit)
+			return Count;
+	}
+	return Count;
 }
