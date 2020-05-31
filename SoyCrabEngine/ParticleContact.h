@@ -60,7 +60,8 @@ protected:
 
 public:
 	//새로운 접촉 처리기 개체를 생성한다.
-	ParticleContactResolver(unsigned Iterations) : Iterations(Iterations), IterationsUsed(0) {}
+	ParticleContactResolver() {}
+	ParticleContactResolver(unsigned Iterations) : Iterations(Iterations) {}
 
 	//최대 반복 횟수를 지정한다.
 	void SetIterations(unsigned Iterations) { ParticleContactResolver::Iterations = Iterations; }
@@ -74,6 +75,9 @@ class ParticleContactGenerator
 {
 public:
 	ParticleContactGenerator() {}
-	//충돌 등록 인터페이스
+	//생성된 접촉의 내용을 채워준다.
+	//포인터 Contact에는 접촉 구조체 배열의 시작 주소가 들어있고,
+	//Limit는 배열의 사용 가능한 최대 크기가 들어 있다.
+	//실제 기록된 접촉 구조체의 개수를 반환한다.
 	virtual unsigned AddContact(ParticleContact* Contact, unsigned Limit) const = 0;
 };
