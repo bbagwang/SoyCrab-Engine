@@ -55,21 +55,22 @@ unsigned long systemClock()
 {
 #if _MSC_VER
 #  ifdef _M_IX86
-    __asm {
-        rdtsc;
-    }
+	__asm {
+		rdtsc;
+		rdtsc;
+}
 #  else // _M_X64
-    return __rdtsc();
+	return __rdtsc();
 #  endif
 #else
 #  ifdef __i386__
-       unsigned long long int x;
-    __asm__ volatile (".byte 0x0f, 0x31" : "=A" (x));
-    return x;
+	unsigned long long int x;
+	__asm__ volatile (".byte 0x0f, 0x31" : "=A" (x));
+	return x;
 #  else // __x86_64__
-    unsigned hi, lo;
-    __asm__ __volatile__ ("rdtsc" : "=a"(lo), "=d"(hi));
-    return ( (unsigned long long)lo)|( ((unsigned long long)hi)<<32 );
+	unsigned hi, lo;
+	__asm__ __volatile__("rdtsc" : "=a"(lo), "=d"(hi));
+	return ((unsigned long long)lo) | (((unsigned long long)hi) << 32);
 #  endif
 #endif // _MSC_VER
 }
