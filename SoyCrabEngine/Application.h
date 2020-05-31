@@ -1,5 +1,5 @@
+#pragma once
 #include "SoyCrabEngine.h"
-#include <cstdlib>
 
 class Application
 {
@@ -42,4 +42,26 @@ public:
 
     //텍스트 렌더
     void renderText(float x, float y, const char *text, void* font=NULL);
+};
+
+//질량 집합을 이용하는 데모를 위해 기능을 추가한 어플리케이션
+class MassAggregateApplication : public Application
+{
+protected:
+    ParticleWorld World;
+    Particle* ParticleArray;
+    GroundContacts GroundContactGenerator;
+
+public:
+	MassAggregateApplication(unsigned int particleCount);
+	virtual ~MassAggregateApplication();
+
+	//그래픽 초기화
+	virtual void initGraphics();
+
+	//파티클 렌더링
+	virtual void display();
+
+	//파티클 위치 업데이트
+	virtual void update();
 };

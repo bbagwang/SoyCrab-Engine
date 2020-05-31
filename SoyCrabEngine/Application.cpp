@@ -2,7 +2,7 @@
 
 void Application::initGraphics()
 {
-    glClearColor(0.9f, 0.95f, 1.0f, 1.0f);
+    glClearColor(0.9f, 0.95f, 1.0, 1.0);
     glEnable(GL_DEPTH_TEST);
     glShadeModel(GL_SMOOTH);
 
@@ -107,4 +107,69 @@ void Application::renderText(float x, float y, const char *text, void *font)
     glMatrixMode(GL_MODELVIEW);
 
     glEnable(GL_DEPTH_TEST);
+}
+
+MassAggregateApplication::MassAggregateApplication(unsigned int ParticleCount) : World(ParticleCount * 10)
+{
+    ParticleArray = new Particle[ParticleCount];
+    
+    for (unsigned i = 0; i < ParticleCount; i++)
+    {
+        World.GetParticles().push_back(ParticleArray + i);
+    }
+
+    GroundContactGenerator.Init(&World.GetParticles());
+    World.GetContactGenerators().push_back(&GroundContactGenerator);
+}
+
+MassAggregateApplication::~MassAggregateApplication()
+{
+    delete[] ParticleArray;
+}
+
+void MassAggregateApplication::initGraphics()
+{
+    //부모 클래스 호출
+    Application::initGraphics();
+}
+
+void MassAggregateApplication::display()
+{
+    //뷰포트 초기화 후 카메라 방향 설정
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    glLoadIdentity();
+    //방향 설정
+    gluLookAt(
+        0.0, 3.5, 8.0,
+        0.0, 3.5, 0.0,
+        0.0, 1.0, 0.0);
+
+    glColor3f(0, 0, 0);
+
+    std::vector<Particle*>& Particles = World.GetParticles();
+    for (auto Iter : Particles)
+    {
+        Particle* particle = Iter;
+        Vector3 Position = particle->GetPosition();
+        glPushMatrix();
+        glTranslatef(Position.X, Position.Y, Position.Z);
+        glutSolidSphere(0.1, 20, 10);
+        glPopMatrix();
+    }
+}
+
+void MassAggregateApplication::update()
+{
+    //합력 초기화
+    World.StartFrame();
+
+    //델타 타임 가져옴
+    float Duration = (float)TimingData::get().lastFrameDuration * 0.001f;
+    if (Duration <= 0.0f)
+        return;
+
+    //시뮬레이션 시작~
+    World.RunPhysics(Duration);
+
+    Application::update();
 }
