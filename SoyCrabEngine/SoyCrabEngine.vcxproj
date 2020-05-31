@@ -157,7 +157,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="app.cpp" />
+    <ClCompile Include="Application.cpp" />
     <ClCompile Include="Ballistic.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
@@ -168,12 +168,13 @@
     <ClCompile Include="ParticleContact.cpp" />
     <ClCompile Include="ParticleForceGenerator.cpp" />
     <ClCompile Include="ParticleForceRegistry.cpp" />
+    <ClCompile Include="ParticleLink.cpp" />
     <ClCompile Include="Random.cpp" />
     <ClCompile Include="SoyCrabEngine.cpp" />
-    <ClCompile Include="timing.cpp" />
+    <ClCompile Include="Timing.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="app.h" />
+    <ClInclude Include="Application.h" />
     <ClInclude Include="Ballistic.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClInclude>
@@ -183,10 +184,11 @@
     <ClInclude Include="ParticleContact.h" />
     <ClInclude Include="ParticleForceGenerator.h" />
     <ClInclude Include="ParticleForceRegistry.h" />
+    <ClInclude Include="ParticleLink.h" />
     <ClInclude Include="Precision.h" />
     <ClInclude Include="Random.h" />
     <ClInclude Include="SoyCrabEngine.h" />
-    <ClInclude Include="timing.h" />
+    <ClInclude Include="Timing.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

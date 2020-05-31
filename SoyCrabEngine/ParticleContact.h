@@ -13,10 +13,10 @@ class ParticleContactResolver;
 
 class ParticleContact
 {
-
 	//ContactResolver가 Contact에 접근해 작용해야 하므로 friend 선언함.
 	friend class ParticleContactResolver;
 
+public:
 	//접촉에 포함되는 입자들을 저장한다.
 	//배경과 접촉시 NULL 이 될 수 있다.
 	Particle* Particles[2];
@@ -74,5 +74,5 @@ class ParticleContactGenerator
 {
 public:
 	//충돌 등록 인터페이스
-	virtual unsigned addContact(ParticleContact* contact, unsigned limit) const = 0;
+	virtual unsigned AddContact(ParticleContact* Contact, unsigned Limit) const = 0;
 };
