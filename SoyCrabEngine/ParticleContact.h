@@ -60,7 +60,7 @@ protected:
 
 public:
 	//새로운 접촉 처리기 개체를 생성한다.
-	ParticleContactResolver(unsigned Iterations) : Iterations(Iterations) {}
+	ParticleContactResolver(unsigned Iterations) : Iterations(Iterations), IterationsUsed(0) {}
 
 	//최대 반복 횟수를 지정한다.
 	void SetIterations(unsigned Iterations) { ParticleContactResolver::Iterations = Iterations; }
@@ -73,6 +73,7 @@ public:
 class ParticleContactGenerator
 {
 public:
+	ParticleContactGenerator() {}
 	//충돌 등록 인터페이스
 	virtual unsigned AddContact(ParticleContact* Contact, unsigned Limit) const = 0;
 };

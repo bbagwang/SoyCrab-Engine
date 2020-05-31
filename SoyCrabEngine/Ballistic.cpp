@@ -1,5 +1,4 @@
 #include "SoyCrabEngine.h"
-#include "Ballistic.h"
 
 BallisticDemo::BallisticDemo()
     : currentShotType(LASER)

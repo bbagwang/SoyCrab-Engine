@@ -1,4 +1,4 @@
-#include "Firework.h"
+#include "SoyCrabEngine.h"
 
 FireworksDemo::FireworksDemo():nextFireworks(0)
 {

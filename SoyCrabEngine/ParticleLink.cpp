@@ -1,4 +1,4 @@
-#include "ParticleLink.h"
+#include "SoyCrabEngine.h"
 
 #pragma region ParticleLink
 real ParticleLink::CurrentLength() const
@@ -67,8 +67,4 @@ unsigned ParticleRod::AddContact(ParticleContact* Contact, unsigned Limit) const
 	Contact->Restitution = 0;
 	return 1;
 }
-#pragma endregion
-
-#pragma region ParticleLink
-
 #pragma endregion

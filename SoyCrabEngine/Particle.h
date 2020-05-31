@@ -1,6 +1,5 @@
 #pragma once
-#include "Precision.h"
-#include "Core.h"
+#include "SoyCrabEngine.h"
 
 class Particle
 {

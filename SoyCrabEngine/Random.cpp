@@ -1,6 +1,4 @@
-#include <cstdlib>
-#include <ctime>
-#include "Random.h"
+#include "SoyCrabEngine.h"
 
 Random::Random()
 {

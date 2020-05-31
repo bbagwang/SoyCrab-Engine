@@ -49,6 +49,6 @@ public:
 	real Length;
 
 public:
+	//막대기가 늘어나거나 줄어들지 않도록 하는데 필요한 접촉을 일으킨다.
 	virtual unsigned AddContact(ParticleContact* Contact, unsigned Limit) const;
-
 };

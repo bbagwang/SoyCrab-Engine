@@ -1,6 +1,4 @@
-#include "Particle.h"
-#include <assert.h>
-#include <iostream>
+#include "SoyCrabEngine.h"
 
 void Particle::SetMass(const real mass)
 {

@@ -1,4 +1,4 @@
-#include "timing.h"
+#include "Timing.h"
 
 //퍼포먼스 카운터용 플레그
 static bool qpcFlag;

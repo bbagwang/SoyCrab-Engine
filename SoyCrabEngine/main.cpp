@@ -1,5 +1,4 @@
 #include "SoyCrabEngine.h"
-#include "Ballistic.h"
 
 //데모 인스턴스 가저오기 전방선언
 extern Application* getApplication();
