@@ -1,4 +1,5 @@
 #pragma once
+#include "SoyCrabEngine.h"
 
 class BallisticDemo : public Application
 {
