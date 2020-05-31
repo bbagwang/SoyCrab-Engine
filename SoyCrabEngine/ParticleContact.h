@@ -1,6 +1,8 @@
 #pragma once
 #include "SoyCrabEngine.h"
 
+class ParticleContactResolver;
+
 //두 물체의 접촉을 처리한다.
 //접촉을 처리하기 위해서는 물체 간 간섭을 제거하고,
 //적절한 반발력을 적용하여 물체를 떼어놓아야 한다.
@@ -11,6 +13,10 @@
 
 class ParticleContact
 {
+
+	//ContactResolver가 Contact에 접근해 작용해야 하므로 friend 선언함.
+	friend class ParticleContactResolver;
+
 	//접촉에 포함되는 입자들을 저장한다.
 	//배경과 접촉시 NULL 이 될 수 있다.
 	Particle* Particles[2];
@@ -20,5 +26,23 @@ class ParticleContact
 	
 	//월드 좌표계 기준 접촉 방향 벡터.
 	Vector3 ContactNormal;
+
+	//접촉의 결과 얼마나 겹쳐져 있는지를 저장한다.
+	real Penetration;
+
+	//각 입자가 접촉하는동안 이동한 양을 저장한다.
+	Vector3 ParticleMovement[2];
+
+protected:
+	//속도와 겹치는 부분을 업데이트하여 접촉을 해소한다.
+	void Resolve(real duration);
+	//접촉으로 인한 분리 속도를 계산한다.
+	real CalculateSeparatingVelocity() const;
+
+private:
+	//접촉에 대한 충격량 계산을 처리한다.
+	void ResolveVelocity(real duration);
+	//접촉에 의해 겹치는 부분을 처리한다.
+	void ResolveInterpenetration(real duration);
 };
 
