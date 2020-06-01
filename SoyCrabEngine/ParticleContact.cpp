@@ -131,6 +131,31 @@ void ParticleContactResolver::ResolveContacts(ParticleContact* ContactArray, uns
 
 		//이 접촉을 처리한다.
 		ContactArray[MaxIndex].Resolve(Duration);
+
+		//모든 입자의 겹친 부분을 처리한다.
+		Vector3* move = ContactArray[MaxIndex].ParticleMovement;
+		for (i = 0; i < NumContacts; i++)
+		{
+			if (ContactArray[i].Particles[0] == ContactArray[MaxIndex].Particles[0])
+			{
+				ContactArray[i].Penetration -= move[0] * ContactArray[i].ContactNormal;
+			}
+			else if (ContactArray[i].Particles[0] == ContactArray[MaxIndex].Particles[1])
+			{
+				ContactArray[i].Penetration -= move[1] * ContactArray[i].ContactNormal;
+			}
+			if (ContactArray[i].Particles[1])
+			{
+				if (ContactArray[i].Particles[1] == ContactArray[MaxIndex].Particles[0])
+				{
+					ContactArray[i].Penetration += move[0] * ContactArray[i].ContactNormal;
+				}
+				else if (ContactArray[i].Particles[1] == ContactArray[MaxIndex].Particles[1])
+				{
+					ContactArray[i].Penetration += move[1] * ContactArray[i].ContactNormal;
+				}
+			}
+		}
 		IterationsUsed++;
 	}
 }

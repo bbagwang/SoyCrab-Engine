@@ -60,7 +60,6 @@ protected:
 
 public:
 	//새로운 접촉 처리기 개체를 생성한다.
-	ParticleContactResolver() {}
 	ParticleContactResolver(unsigned Iterations) : Iterations(Iterations) {}
 
 	//최대 반복 횟수를 지정한다.
