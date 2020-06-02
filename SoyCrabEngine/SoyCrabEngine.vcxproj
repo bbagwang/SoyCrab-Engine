@@ -161,7 +161,9 @@
     <ClCompile Include="Ballistic.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="BridgeDemo.cpp" />
+    <ClCompile Include="BridgeDemo.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="Core.cpp" />
     <ClCompile Include="Firework.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
@@ -173,6 +175,7 @@
     <ClCompile Include="ParticleForceRegistry.cpp" />
     <ClCompile Include="ParticleLink.cpp" />
     <ClCompile Include="ParticleWorld.cpp" />
+    <ClCompile Include="PlatformDemo.cpp" />
     <ClCompile Include="Random.cpp" />
     <ClCompile Include="SoyCrabEngine.cpp" />
     <ClCompile Include="Timing.cpp" />
@@ -182,7 +185,9 @@
     <ClInclude Include="Ballistic.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClInclude>
-    <ClInclude Include="BridgeDemo.h" />
+    <ClInclude Include="BridgeDemo.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="Core.h" />
     <ClInclude Include="Firework.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
@@ -193,6 +198,7 @@
     <ClInclude Include="ParticleForceRegistry.h" />
     <ClInclude Include="ParticleLink.h" />
     <ClInclude Include="ParticleWorld.h" />
+    <ClInclude Include="PlatformDemo.h" />
     <ClInclude Include="Precision.h" />
     <ClInclude Include="Random.h" />
     <ClInclude Include="SoyCrabEngine.h" />

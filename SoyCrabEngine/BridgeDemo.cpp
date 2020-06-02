@@ -70,7 +70,7 @@ void BridgeDemo::UpdateAdditionalMass()
 		ParticleArray[i].SetMass(BASE_MASS);
 	}
 
-	// Find the coordinates of the mass as an index and proportion
+	// 인덱스와 질량을 통해 질량 위치를 찾음.
 	int x = int(MassPosition.X);
 	real xp = real_fmod(MassPosition.X, real(1.0f));
 	if (x < 0)
